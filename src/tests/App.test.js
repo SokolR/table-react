@@ -2,12 +2,12 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from '../components/App';
 
-describe('App.buildTableArray', () => {
+describe('App.createTable', () => {
   it('Should create new table, rows table = initialWidth, columns table = initialHeight', () => {
     const wrapper = mount(<App />);
     const instance = wrapper.instance();
 
-    instance.buildTableArray();
+    instance.createTable();
 
     expect(instance.state.table.length).toBe(instance.initialHeight);
     instance.state.table.forEach(tableRow => {
@@ -16,25 +16,25 @@ describe('App.buildTableArray', () => {
   });
 });
 
-describe('App.buttonAddRow', () => {
+describe('App.addRow', () => {
   it('Should add new row to state table', () => {
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
     const resultRows = instance.initialHeight + 1;
 
-    instance.buttonAddRow();
+    instance.addRow();
 
     expect(instance.state.table.length).toBe(resultRows);
   });
 });
 
-describe('App.buttonAddColumn', () => {
+describe('App.addColumn', () => {
   it('Should add new column to state table', () => {
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
     const resultColumns = instance.initialWidth + 1;
 
-    instance.buttonAddColumn();
+    instance.addColumn();
 
     instance.state.table.forEach(tableRow => {
       expect(tableRow.tableArr.length).toBe(resultColumns);
@@ -42,14 +42,14 @@ describe('App.buttonAddColumn', () => {
   });
 });
 
-describe('App.buttonRemoveRow', () => {
+describe('App.delRow', () => {
   it('Should remove row from state table', () => {
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
     const resultlRows = instance.initialHeight - 1;
     const rowDeleteId = instance.state.currentRowId;
 
-    instance.buttonRemoveRow();
+    instance.delRow();
 
     expect(instance.state.table.length).toBe(resultlRows);
 
@@ -63,7 +63,7 @@ describe('App.buttonRemoveRow', () => {
     const instance = wrapper.instance();
     const rowDeleteId = instance.state.currentRowId;
 
-    instance.buttonRemoveRow();
+    instance.delRow();
     expect(instance.state.table.length).toBe(1);
 
     instance.state.table.forEach(tableRow => {
@@ -72,14 +72,14 @@ describe('App.buttonRemoveRow', () => {
   });
 });
 
-describe('App.buttonRemoveColumn', () => {
+describe('App.delColumn', () => {
   it('Should remove column from state table', () => {
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
     const resultColumns = instance.initialWidth - 1;
     const columnDeleteId = instance.state.currentColumnId;
 
-    instance.buttonRemoveColumn();
+    instance.delColumn();
 
     instance.state.table.forEach(tableRow => {
       expect(tableRow.tableArr.length).toBe(resultColumns);
@@ -92,7 +92,7 @@ describe('App.buttonRemoveColumn', () => {
     const instance = wrapper.instance();
     const columnDeleteId = instance.state.currentColumnId;
 
-    instance.buttonRemoveColumn();
+    instance.delColumn();
 
     instance.state.table.forEach(tableRow => {
       expect(tableRow.tableArr.length).toBe(1);
