@@ -2,8 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Button } from '../components/Button';
 
-describe('Button adds rows / columns', () => {
-  it('Should call buttonAddRow callback when clicked', () => {
+describe('Button adds rows and columns', () => {
+  it('Should call addRow button callback when clicked', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <Button buttonClick={mockFn} buttonClass={'add-row'} cellSize={50} />
@@ -14,7 +14,7 @@ describe('Button adds rows / columns', () => {
     expect(mockFn.mock.calls.length).toBe(1);
   });
 
-  it('Should call buttonAddColumn callback when clicked', () => {
+  it('Should call addColumn button callback when clicked', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <Button
@@ -31,7 +31,7 @@ describe('Button adds rows / columns', () => {
   });
 });
 
-describe('Button deletes rows / columns', () => {
+describe('Button deletes rows and columns', () => {
   it('Should call buttonRemoveRow callback when clicked', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
@@ -43,7 +43,7 @@ describe('Button deletes rows / columns', () => {
     expect(mockFn.mock.calls.length).toBe(1);
   });
 
-  it('Should call buttonRemoveColumn callback when clicked', () => {
+  it('Should call delColumn button callback when clicked', () => {
     const mockFn = jest.fn();
     const wrapper = shallow(
       <Button
