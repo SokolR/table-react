@@ -3,14 +3,14 @@ import { DynamicTable } from './DynamicTable';
 import { Button } from './Button';
 import classNames from 'classnames';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.initialWidth = props.initialWidth;
     this.initialHeight = props.initialHeight;
     this.cellSize = props.cellSize;
     this.state = {
-      table: this.buildTableArray(),
+      table: this.createTable(),
       currentRowId: 0,
       currentColumnId: 0,
       rowVisibility: false,
@@ -18,7 +18,7 @@ class App extends Component {
     };
   }
 
-  buildTableArray() {
+  createTable() {
     let newTable = [];
 
     for (let i = 0; i < this.initialHeight; i++) {
@@ -31,7 +31,7 @@ class App extends Component {
     return [...newTable];
   }
 
-  buttonAddRow = () => {
+  addRow = () => {
     const { table } = this.state;
 
     const newId = table.reduce((prev, cur) => {
@@ -46,7 +46,7 @@ class App extends Component {
     this.setState({ table: [...newTable] });
   };
 
-  buttonAddColumn = () => {
+  addColumn = () => {
     const { table } = this.state;
     let newId = 0;
 
@@ -63,7 +63,7 @@ class App extends Component {
     this.setState({ table: [...newTable] });
   };
 
-  buttonRemoveRow = () => {
+  delRow = () => {
     const { table, currentRowId } = this.state;
     const prevRowId = this.getIndexRow();
 
@@ -85,7 +85,7 @@ class App extends Component {
     });
   };
 
-  buttonRemoveColumn = () => {
+  delColumn = () => {
     const { table, currentColumnId } = this.state;
     const prevColumnId = this.getIndexColumn();
 
@@ -154,13 +154,13 @@ class App extends Component {
         <Button
           buttonClass={'add-row'}
           cellSize={this.cellSize}
-          buttonClick={this.buttonAddRow}
+          buttonClick={this.addRow}
         />
         <Button
           buttonClass={'add-column'}
           cellSize={this.cellSize}
           propertyStyle={'top'}
-          buttonClick={this.buttonAddColumn}
+          buttonClick={this.addColumn}
         />
         <Button
           buttonClass={classNames('remove-row', { visibility: rowVisibility })}
@@ -168,7 +168,7 @@ class App extends Component {
           propertyStyle={'top'}
           valueStyle={rowPosition}
           text={'-'}
-          buttonClick={this.buttonRemoveRow}
+          buttonClick={this.delRow}
         />
         <Button
           buttonClass={classNames('remove-column', {
@@ -177,7 +177,7 @@ class App extends Component {
           cellSize={this.cellSize}
           valueStyle={columnPosition}
           text={'-'}
-          buttonClick={this.buttonRemoveColumn}
+          buttonClick={this.delColumn}
         />
       </div>
     );
@@ -190,4 +190,3 @@ App.defaultProps = {
   cellSize: 50,
 };
 
-export default App;
